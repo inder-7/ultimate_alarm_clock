@@ -24,6 +24,7 @@ import 'package:ultimate_alarm_clock/app/utils/audio_utils.dart';
 import 'package:ultimate_alarm_clock/app/utils/utils.dart';
 import 'package:ultimate_alarm_clock/app/utils/constants.dart';
 import 'package:uuid/uuid.dart';
+import 'package:intl_phone_number_input/src/models/country_model.dart';
 import '../../settings/controllers/settings_controller.dart';
 
 class AddOrUpdateAlarmController extends GetxController {
@@ -1338,18 +1339,25 @@ class AddOrUpdateAlarmController extends GetxController {
       ringOn: isFutureDate.value,
     );
 
-    if(homeController.isProfileUpdate.value)
-      {
-        var profileId =
-        await IsarDb.profileId(homeController.selectedProfile.value);
-        print(profileId);
-        if (profileId != 'null') profileModel.isarId = profileId;
-        print(profileModel.isarId);
-        await IsarDb.updateAlarmProfiles(profileTextEditingController.text);
-      }
+    if (homeController.isProfileUpdate.value) {
+      var profileId =
+          await IsarDb.profileId(homeController.selectedProfile.value);
+      print(profileId);
+      if (profileId != 'null') profileModel.isarId = profileId;
+      print(profileModel.isarId);
+      await IsarDb.updateAlarmProfiles(profileTextEditingController.text);
+    }
     await IsarDb.addProfile(profileModel);
     homeController.selectedProfile.value = profileModel.profileName;
     storage.writeProfile(profileModel.profileName);
     homeController.writeProfileName(profileModel.profileName);
   }
 }
+
+  int orderedCountryCode(Country countryA, Country countryB) {
+    // `??` for null safety of 'dialCode'
+    String dialCodeA = countryA.dialCode ?? '0';
+    String dialCodeB = countryB.dialCode ?? '0';
+
+    return int.parse(dialCodeA).compareTo(int.parse(dialCodeB));
+  }
