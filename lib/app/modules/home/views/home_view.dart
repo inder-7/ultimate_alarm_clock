@@ -1,7 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'package:flutter/material.dart';
-import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:ultimate_alarm_clock/app/data/models/alarm_model.dart';
@@ -443,7 +442,7 @@ class HomeView extends GetView<HomeController> {
                   Padding(
                     padding:
                         EdgeInsets.only(bottom: controller.scalingFactor * 20),
-                    child: ProfileSelect(),
+                    child: const ProfileSelect(),
                   ),
                   Expanded(
                     child: GlowingOverscrollIndicator(

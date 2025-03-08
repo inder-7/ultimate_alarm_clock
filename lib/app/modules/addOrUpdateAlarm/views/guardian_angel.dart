@@ -6,10 +6,9 @@ import 'package:ultimate_alarm_clock/app/modules/settings/controllers/theme_cont
 import 'package:ultimate_alarm_clock/app/utils/constants.dart';
 import 'package:ultimate_alarm_clock/app/utils/utils.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:telephony/telephony.dart';
 
-class GaurdianAngel extends StatelessWidget {
-  const GaurdianAngel({
+class GuardianAngel extends StatelessWidget {
+  const GuardianAngel({
     super.key,
     required this.controller,
     required this.themeController,
@@ -93,7 +92,7 @@ class GaurdianAngel extends StatelessWidget {
             alignment: Alignment.centerLeft,
               child: Obx(
                 () => Text(
-                  'Gaurdian Angel'.tr,
+                  'Guardian Angel'.tr,
                   style: TextStyle(
                     color: themeController.primaryTextColor.value,
                   ),
