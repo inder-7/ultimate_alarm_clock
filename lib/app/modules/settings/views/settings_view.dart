@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:ultimate_alarm_clock/app/modules/settings/controllers/theme_controller.dart';
 import 'package:ultimate_alarm_clock/app/modules/settings/views/customize_undo_duration.dart';
 
 import 'package:ultimate_alarm_clock/app/modules/settings/views/enable_24Hour_format.dart';
 
 import 'package:ultimate_alarm_clock/app/modules/settings/views/enable_haptic_feedback.dart';
 import 'package:ultimate_alarm_clock/app/modules/settings/views/enable_sorted_alarm_list.dart';
+import 'package:ultimate_alarm_clock/app/modules/settings/views/flip_to_snooze.dart';
 import 'package:ultimate_alarm_clock/app/modules/settings/views/language_menu.dart';
 import 'package:ultimate_alarm_clock/app/modules/settings/views/theme_value_tile.dart';
 import 'package:ultimate_alarm_clock/app/utils/utils.dart';
@@ -52,6 +54,17 @@ class SettingsView extends GetView<SettingsController> {
             padding: const EdgeInsets.symmetric(vertical: 25.0),
             child: Column(
               children: [
+                ElevatedButton(
+                  onPressed: () {
+                    ThemeController themeController = Get.find();
+                    themeController.toggleTheme(
+                      themeController.currentTheme.value == ThemeMode.dark
+                          ? ThemeMode.light
+                          : ThemeMode.dark,
+                    );
+                  },
+                  child: Text('Toggle Theme'),
+                ),
                 GoogleSignIn(
                   controller: controller,
                   width: width,
@@ -80,6 +93,15 @@ class SettingsView extends GetView<SettingsController> {
                   height: 20,
                 ),
                 EnableSortedAlarmList(
+                  controller: controller,
+                  height: height,
+                  width: width,
+                  themeController: controller.themeController,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                FlipToSnooze(
                   controller: controller,
                   height: height,
                   width: width,

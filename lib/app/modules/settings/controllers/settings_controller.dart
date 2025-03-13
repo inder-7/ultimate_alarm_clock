@@ -23,6 +23,7 @@ class SettingsController extends GetxController {
   var is24HrsEnabled = false.obs;
   final _f24HrsEnabledKey = '24_hours_format';
   var isSortedAlarmListEnabled = true.obs;
+  var isFlipToSnoozeEnabled = false.obs;
   final _sortedAlarmListKey = 'sorted_alarm_list';
   var currentLanguage = 'en_US'.obs;
   final _secureStorageProvider = SecureStorageProvider();
@@ -228,10 +229,23 @@ class SettingsController extends GetxController {
     );
   }
 
+  void _saveFlipToSnoozePreference() async {
+    await _secureStorageProvider.writeFlipToSnoozeValue(
+      key: _sortedAlarmListKey,
+      isFlipToSnoozeEnabled: isFlipToSnoozeEnabled.value,
+    );
+  }
+
   void toggleSortedAlarmList(bool enabled) {
     isSortedAlarmListEnabled.value = enabled;
     homeController.isSortedAlarmListEnabled.value = enabled;
     _saveSortedAlarmListPreference();
+  }
+
+  void toggleFlipToSnooze(bool enabled) {
+    isFlipToSnoozeEnabled.value = enabled;
+    homeController.isFlipToSnoozeEnabled.value = enabled;
+    _saveFlipToSnoozePreference();
   }
 
   void updateLocale(String key) {

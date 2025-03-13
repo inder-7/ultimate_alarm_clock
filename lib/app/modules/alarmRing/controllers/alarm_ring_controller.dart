@@ -17,13 +17,14 @@ import 'package:ultimate_alarm_clock/app/data/providers/isar_provider.dart';
 import 'package:ultimate_alarm_clock/app/data/providers/secure_storage_provider.dart';
 import 'package:ultimate_alarm_clock/app/modules/settings/controllers/settings_controller.dart';
 import 'package:ultimate_alarm_clock/app/utils/audio_utils.dart';
-
+import 'package:sensors_plus/sensors_plus.dart';
 import 'package:ultimate_alarm_clock/app/utils/utils.dart';
 import 'package:vibration/vibration.dart';
 
 import '../../home/controllers/home_controller.dart';
 
 class AlarmControlController extends GetxController {
+  StreamSubscription? _accelerometerSubscription;
   MethodChannel alarmChannel = MethodChannel('ulticlock');
   RxString note = ''.obs;
   Timer? vibrationTimer;
@@ -153,11 +154,26 @@ class AlarmControlController extends GetxController {
       }
     });
   }
+  void _listenForFlip() {
+    _accelerometerSubscription = accelerometerEvents.listen((event) {
+      debugPrint("inside listen for flip");
+      debugPrint("inside listen for flip" + event.z.toString());
+    if (event.z < -8) {
+          if (!isSnoozing.value) {
+            startSnooze();
+            debugPrint("Phone flipped, snoozing alarm...");
+          }
+        }
+    });
+  }
 
   @override
   void onInit() async {
     super.onInit();
     currentlyRingingAlarm.value = Get.arguments;
+     if (homeController.isFlipToSnoozeEnabled ==  true.obs) {
+      _listenForFlip();
+    }
     print('hwyooo ${currentlyRingingAlarm.value.isGuardian}');
     if (currentlyRingingAlarm.value.isGuardian) {
       guardianTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -296,6 +312,7 @@ class AlarmControlController extends GetxController {
     super.onClose();
     Vibration.cancel();
     vibrationTimer!.cancel();
+    _accelerometerSubscription?.cancel();
     isAlarmActive = false;
     String ringtoneName = currentlyRingingAlarm.value.ringtoneName;
     AudioUtils.stopAlarm(ringtoneName: ringtoneName);

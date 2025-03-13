@@ -66,6 +66,7 @@ class HomeController extends GetxController {
   RxDouble scalingFactor = 1.0.obs;
 
   RxBool isSortedAlarmListEnabled = true.obs;
+  RxBool isFlipToSnoozeEnabled = false.obs;
   RxBool inMultipleSelectMode = false.obs;
   RxBool isAnyAlarmHolded = false.obs;
   RxBool isAllAlarmsSelected = false.obs;

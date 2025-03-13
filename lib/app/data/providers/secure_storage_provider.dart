@@ -92,6 +92,17 @@ class SecureStorageProvider {
     );
   }
 
+
+  Future<void> writeFlipToSnoozeValue({
+    required String key,
+    required bool isFlipToSnoozeEnabled
+  }) async {
+    await _secureStorage.write(
+      key: key,
+      value: isFlipToSnoozeEnabled.toString(),
+    );
+  }
+
   Future<AppTheme> readThemeValue() async {
     String themeValue =
         await _secureStorage.read(key: 'theme_value') ?? 'AppTheme.dark';
