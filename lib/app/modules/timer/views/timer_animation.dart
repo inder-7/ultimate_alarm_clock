@@ -128,7 +128,7 @@ class _TimerAnimatedCardState extends State<TimerAnimatedCard>
                                     context,
                                   ).textTheme.bodySmall!.copyWith(
                                       fontWeight: FontWeight.w500,
-                                      color: kprimaryColor,
+                                      color: getPrimaryColorTheme(),
                                       fontSize: 18),
                                 ),
                               ),
@@ -227,7 +227,7 @@ class _TimerAnimatedCardState extends State<TimerAnimatedCard>
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
-                                        color: kprimaryColor,
+                                        color: getPrimaryColorTheme(),
                                         borderRadius:
                                             BorderRadius.circular(80)),
                                     width: 80,

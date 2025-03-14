@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:googleapis/servicemanagement/v1.dart';
+import 'package:ultimate_alarm_clock/app/data/providers/get_storage_provider.dart';
+import 'package:ultimate_alarm_clock/app/modules/settings/controllers/settings_controller.dart';
 
 enum ApiKeys {
   openWeatherMap,
@@ -16,7 +21,9 @@ enum WeatherKeyState { add, update, saveAdded, saveUpdated }
 
 enum CounterUpdate { increment, decrement }
 
-const Color kprimaryColor = Color(0xffAFFC41);
+const Color kprimaryColor =  Color(0xffAFFC41);
+
+const valueKPrimary =  Color(0xffAFFC41);
 
 // Dark Theme Color Palette
 const Color ksecondaryColor = Color(0xffB8E9C4);
@@ -34,12 +41,34 @@ const Color kLightPrimaryTextColor = Color(0xff444444);
 const Color kLightSecondaryTextColor = Color(0xff444444);
 const Color kLightPrimaryDisabledTextColor = Color(0xffACACAB);
 
+Color getPrimaryColorTheme() {  //return kprimaryColor;
+
+  final storage = Get.find<GetStorageProvider>();
+  final colorScheme = Get.theme.colorScheme;
+  debugPrint("logging value of colorsScheme");
+  //debugPrint("logging value of colorsScheme " + settingsController.isMaterial3Enabled.toString());
+  return colorScheme.primary;
+  // if (settingsController.isMaterial3Enabled == true.obs) return colorScheme.primary;
+  // return kprimaryColor;
+}
+
+Color getSecondaryColorTheme() {  //return kprimaryColor;
+
+  final storage = Get.find<GetStorageProvider>();
+  final colorScheme = Get.theme.colorScheme;
+  debugPrint("logging value of colorsScheme");
+  //debugPrint("logging value of colorsScheme " + settingsController.isMaterial3Enabled.toString());
+  return colorScheme.secondary;
+  // if (settingsController.isMaterial3Enabled == true.obs) return colorScheme.primary;
+  // return kprimaryColor;
+}
+
 // Dark ThemeData
 ThemeData kThemeData = ThemeData(
   canvasColor: kprimaryBackgroundColor,
-  useMaterial3: false,
+  useMaterial3: true,
   textButtonTheme: TextButtonThemeData(
-    style: TextButton.styleFrom(foregroundColor: ksecondaryColor),
+    style: TextButton.styleFrom(foregroundColor: getSecondaryColorTheme()),
   ),
   iconTheme: const IconThemeData(
     color: kprimaryTextColor,
@@ -75,48 +104,48 @@ ThemeData kThemeData = ThemeData(
       letterSpacing: 0.15,
     ),
   ),
-  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+  floatingActionButtonTheme:  FloatingActionButtonThemeData(
     foregroundColor: Colors.black,
     backgroundColor: kprimaryColor,
   ),
   primaryColor: kprimaryColor,
   scaffoldBackgroundColor: kprimaryBackgroundColor,
   appBarTheme: const AppBarTheme(backgroundColor: kprimaryBackgroundColor),
-  colorScheme: ColorScheme.fromSwatch().copyWith(
-    secondary: ksecondaryColor,
+  colorScheme:  ColorScheme.fromSwatch().copyWith(
+    secondary: getSecondaryColorTheme(),
     background: kprimaryBackgroundColor,
     onPrimaryContainer: ksecondaryBackgroundColor,
   ),
   inputDecorationTheme: InputDecorationTheme(
     hintStyle: TextStyle(color: kprimaryTextColor.withOpacity(0.5)),
-    labelStyle: const TextStyle(color: kprimaryTextColor),
+    labelStyle:  TextStyle(color: kprimaryTextColor),
     focusColor: kprimaryTextColor,
     enabledBorder: OutlineInputBorder(
-      borderSide: const BorderSide(color: kprimaryColor),
+      borderSide:  BorderSide(color: kprimaryColor),
       borderRadius: BorderRadius.circular(12),
     ),
     focusedBorder: OutlineInputBorder(
-      borderSide: const BorderSide(color: kprimaryColor),
+      borderSide:  BorderSide(color: kprimaryColor),
       borderRadius: BorderRadius.circular(12),
     ),
   ),
-  textSelectionTheme: const TextSelectionThemeData(
+  textSelectionTheme:  TextSelectionThemeData(
     cursorColor: kprimaryColor,
     selectionColor: kprimaryColor,
-    selectionHandleColor: ksecondaryColor,
+    selectionHandleColor: getSecondaryColorTheme(),
   ),
   sliderTheme: SliderThemeData(
     thumbColor: kprimaryColor,
     activeTrackColor: kprimaryColor,
     inactiveTrackColor: kprimaryTextColor.withOpacity(0.3),
   ),
-  outlinedButtonTheme: const OutlinedButtonThemeData(
+  outlinedButtonTheme:  OutlinedButtonThemeData(
     style: ButtonStyle(
       backgroundColor: MaterialStatePropertyAll(Colors.transparent),
       side: MaterialStatePropertyAll(BorderSide(color: kprimaryColor)),
     ),
   ),
-  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+  bottomNavigationBarTheme:  BottomNavigationBarThemeData(
     elevation: 0,
     backgroundColor: kprimaryBackgroundColor,
     selectedLabelStyle: TextStyle(
@@ -180,7 +209,7 @@ ThemeData kThemeData = ThemeData(
 
 // Light ThemeData
 ThemeData kLightThemeData = ThemeData(
-  useMaterial3: false,
+  useMaterial3: true,
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(foregroundColor: kprimaryColor),
   ),
@@ -218,7 +247,7 @@ ThemeData kLightThemeData = ThemeData(
       letterSpacing: 0.15,
     ),
   ),
-  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+  floatingActionButtonTheme:  FloatingActionButtonThemeData(
     foregroundColor: Colors.black,
     backgroundColor: kprimaryColor,
   ),
@@ -235,15 +264,15 @@ ThemeData kLightThemeData = ThemeData(
     labelStyle: const TextStyle(color: kLightPrimaryTextColor),
     focusColor: kLightPrimaryTextColor,
     enabledBorder: OutlineInputBorder(
-      borderSide: const BorderSide(color: kprimaryColor),
+      borderSide:  BorderSide(color: kprimaryColor),
       borderRadius: BorderRadius.circular(12),
     ),
     focusedBorder: OutlineInputBorder(
-      borderSide: const BorderSide(color: kprimaryColor),
+      borderSide:  BorderSide(color: kprimaryColor),
       borderRadius: BorderRadius.circular(12),
     ),
   ),
-  textSelectionTheme: const TextSelectionThemeData(
+  textSelectionTheme:  TextSelectionThemeData(
     cursorColor: kprimaryColor,
     selectionColor: kprimaryColor,
     selectionHandleColor: kLightSecondaryColor,
@@ -253,7 +282,7 @@ ThemeData kLightThemeData = ThemeData(
     activeTrackColor: kprimaryColor,
     inactiveTrackColor: kLightPrimaryTextColor.withOpacity(0.3),
   ),
-  outlinedButtonTheme: const OutlinedButtonThemeData(
+  outlinedButtonTheme:  OutlinedButtonThemeData(
     style: ButtonStyle(
       backgroundColor: MaterialStatePropertyAll(Colors.transparent),
       side: MaterialStatePropertyAll(BorderSide(color: kprimaryColor)),
