@@ -1,10 +1,5 @@
-import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:googleapis/servicemanagement/v1.dart';
-import 'package:ultimate_alarm_clock/app/data/providers/get_storage_provider.dart';
-import 'package:ultimate_alarm_clock/app/modules/settings/controllers/settings_controller.dart';
 
 enum ApiKeys {
   openWeatherMap,
@@ -22,10 +17,7 @@ enum WeatherKeyState { add, update, saveAdded, saveUpdated }
 
 enum CounterUpdate { increment, decrement }
 
-const Color kprimaryColor =  Color(0xffAFFC41);
-
-const valueKPrimary =  Color(0xffAFFC41);
-
+const Color kprimaryColor = Color(0xffAFFC41);
 // Dark Theme Color Palette
 const Color ksecondaryColor = Color(0xffB8E9C4);
 const Color kprimaryBackgroundColor = Color(0xff16171c);
@@ -42,26 +34,12 @@ const Color kLightPrimaryTextColor = Color(0xff444444);
 const Color kLightSecondaryTextColor = Color(0xff444444);
 const Color kLightPrimaryDisabledTextColor = Color(0xffACACAB);
 
-Color getPrimaryColorTheme() {  //return kprimaryColor;
-
-  final storage = Get.find<GetStorageProvider>();
-  final colorScheme = Get.theme.colorScheme;
-  debugPrint("logging value of colorsScheme");
-  //debugPrint("logging value of colorsScheme " + settingsController.isMaterial3Enabled.toString());
-  return colorScheme.primary;
-  // if (settingsController.isMaterial3Enabled == true.obs) return colorScheme.primary;
-  // return kprimaryColor;
+Color getPrimaryColorTheme() {
+  return Get.theme.colorScheme.primary;
 }
 
-Color getSecondaryColorTheme() {  //return kprimaryColor;
-
-  final storage = Get.find<GetStorageProvider>();
-  final colorScheme = Get.theme.colorScheme;
-  debugPrint("logging value of colorsScheme");
-  //debugPrint("logging value of colorsScheme " + settingsController.isMaterial3Enabled.toString());
-  return colorScheme.secondary;
-  // if (settingsController.isMaterial3Enabled == true.obs) return colorScheme.primary;
-  // return kprimaryColor;
+Color getSecondaryColorTheme() {
+  return Get.theme.colorScheme.secondary;
 }
 
 // Dark ThemeData
@@ -105,32 +83,32 @@ ThemeData kThemeData = ThemeData(
       letterSpacing: 0.15,
     ),
   ),
-  floatingActionButtonTheme:  FloatingActionButtonThemeData(
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
     foregroundColor: Colors.black,
     backgroundColor: kprimaryColor,
   ),
   primaryColor: kprimaryColor,
   scaffoldBackgroundColor: kprimaryBackgroundColor,
   appBarTheme: const AppBarTheme(backgroundColor: kprimaryBackgroundColor),
-  colorScheme:  ColorScheme.fromSwatch().copyWith(
+  colorScheme: ColorScheme.fromSwatch().copyWith(
     secondary: getSecondaryColorTheme(),
     background: kprimaryBackgroundColor,
     onPrimaryContainer: ksecondaryBackgroundColor,
   ),
   inputDecorationTheme: InputDecorationTheme(
     hintStyle: TextStyle(color: kprimaryTextColor.withOpacity(0.5)),
-    labelStyle:  TextStyle(color: kprimaryTextColor),
+    labelStyle: TextStyle(color: kprimaryTextColor),
     focusColor: kprimaryTextColor,
     enabledBorder: OutlineInputBorder(
-      borderSide:  BorderSide(color: kprimaryColor),
+      borderSide: BorderSide(color: kprimaryColor),
       borderRadius: BorderRadius.circular(12),
     ),
     focusedBorder: OutlineInputBorder(
-      borderSide:  BorderSide(color: kprimaryColor),
+      borderSide: BorderSide(color: kprimaryColor),
       borderRadius: BorderRadius.circular(12),
     ),
   ),
-  textSelectionTheme:  TextSelectionThemeData(
+  textSelectionTheme: TextSelectionThemeData(
     cursorColor: kprimaryColor,
     selectionColor: kprimaryColor,
     selectionHandleColor: getSecondaryColorTheme(),
@@ -140,13 +118,13 @@ ThemeData kThemeData = ThemeData(
     activeTrackColor: kprimaryColor,
     inactiveTrackColor: kprimaryTextColor.withOpacity(0.3),
   ),
-  outlinedButtonTheme:  OutlinedButtonThemeData(
+  outlinedButtonTheme: const OutlinedButtonThemeData(
     style: ButtonStyle(
       backgroundColor: MaterialStatePropertyAll(Colors.transparent),
       side: MaterialStatePropertyAll(BorderSide(color: kprimaryColor)),
     ),
   ),
-  bottomNavigationBarTheme:  BottomNavigationBarThemeData(
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     elevation: 0,
     backgroundColor: kprimaryBackgroundColor,
     selectedLabelStyle: TextStyle(
@@ -248,7 +226,7 @@ ThemeData kLightThemeData = ThemeData(
       letterSpacing: 0.15,
     ),
   ),
-  floatingActionButtonTheme:  FloatingActionButtonThemeData(
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
     foregroundColor: Colors.black,
     backgroundColor: kprimaryColor,
   ),
@@ -265,15 +243,15 @@ ThemeData kLightThemeData = ThemeData(
     labelStyle: const TextStyle(color: kLightPrimaryTextColor),
     focusColor: kLightPrimaryTextColor,
     enabledBorder: OutlineInputBorder(
-      borderSide:  BorderSide(color: kprimaryColor),
+      borderSide: BorderSide(color: kprimaryColor),
       borderRadius: BorderRadius.circular(12),
     ),
     focusedBorder: OutlineInputBorder(
-      borderSide:  BorderSide(color: kprimaryColor),
+      borderSide: BorderSide(color: kprimaryColor),
       borderRadius: BorderRadius.circular(12),
     ),
   ),
-  textSelectionTheme:  TextSelectionThemeData(
+  textSelectionTheme: const TextSelectionThemeData(
     cursorColor: kprimaryColor,
     selectionColor: kprimaryColor,
     selectionHandleColor: kLightSecondaryColor,
@@ -283,7 +261,7 @@ ThemeData kLightThemeData = ThemeData(
     activeTrackColor: kprimaryColor,
     inactiveTrackColor: kLightPrimaryTextColor.withOpacity(0.3),
   ),
-  outlinedButtonTheme:  OutlinedButtonThemeData(
+  outlinedButtonTheme: const OutlinedButtonThemeData(
     style: ButtonStyle(
       backgroundColor: MaterialStatePropertyAll(Colors.transparent),
       side: MaterialStatePropertyAll(BorderSide(color: kprimaryColor)),
@@ -352,128 +330,130 @@ ThemeData kLightThemeData = ThemeData(
 );
 
 ThemeData _createLightTheme(ColorScheme? lightDynamic) {
-    if (lightDynamic != null) {
-      return ThemeData(
-        useMaterial3: true,
-        colorScheme: lightDynamic,
-        fontFamily: 'poppins',
-        brightness: Brightness.light,
-        textTheme: createTextTheme(lightDynamic, false),
-        iconTheme: IconThemeData(
-          color: lightDynamic.onSurface,
-        ),
-        sliderTheme: SliderThemeData(
-          thumbColor: lightDynamic.primary,
-          activeTrackColor: lightDynamic.primary,
-          inactiveTrackColor: lightDynamic.onSurface.withOpacity(0.3),
-        ),
-        inputDecorationTheme: InputDecorationTheme(
-          hintStyle: TextStyle(color: lightDynamic.onSurface.withOpacity(0.5)),
-          labelStyle: TextStyle(color: lightDynamic.onSurface),
-          focusColor: lightDynamic.onSurface,
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: lightDynamic.primary),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: lightDynamic.primary),
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-      );
-    } else {
-      // Fall back to the app's predefined light theme
-      return kLightThemeData;
-    }
-  }
-
-  ThemeData _createDarkTheme(ColorScheme? darkDynamic) {
-    if (darkDynamic != null) {
-      return ThemeData(
-        useMaterial3: true,
-        colorScheme: darkDynamic,
-        fontFamily: 'poppins',
-        brightness: Brightness.dark,
-        textTheme: createTextTheme(darkDynamic, true),
-        iconTheme: IconThemeData(
-          color: darkDynamic.onSurface,
-        ),
-        sliderTheme: SliderThemeData(
-          thumbColor: darkDynamic.primary,
-          activeTrackColor: darkDynamic.primary,
-          inactiveTrackColor: darkDynamic.onSurface.withOpacity(0.3),
-        ),
-        inputDecorationTheme: InputDecorationTheme(
-          hintStyle: TextStyle(color: darkDynamic.onSurface.withOpacity(0.5)),
-          labelStyle: TextStyle(color: darkDynamic.onSurface),
-          focusColor: darkDynamic.onSurface,
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: darkDynamic.primary),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: darkDynamic.primary),
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-      );
-    } else {
-      // Fall back to the app's predefined dark theme
-      return kThemeData;
-    }
-  }
-
-  TextTheme createTextTheme(ColorScheme colorScheme, bool isDark) {
-    final textColor = colorScheme.onSurface;
-
-    return TextTheme(
-      titleSmall: TextStyle(color: textColor, letterSpacing: 0.1, fontSize: 14),
-      titleMedium: TextStyle(color: textColor, letterSpacing: 0.1, fontSize: 16),
-      titleLarge: TextStyle(color: textColor, letterSpacing: 0.1, fontSize: 18),
-
-      bodySmall: TextStyle(color: textColor, letterSpacing: 0.1, fontSize: 12),
-      bodyMedium: TextStyle(color: textColor, letterSpacing: 0.1, fontSize: 14),
-      bodyLarge: TextStyle(color: textColor, letterSpacing: 0.1, fontSize: 16),
-
-      displaySmall: TextStyle(
-        fontSize: 14,
-        color: textColor,
-        fontWeight: FontWeight.w500,
-        letterSpacing: 0.1,
+  if (lightDynamic != null) {
+    return ThemeData(
+      useMaterial3: true,
+      colorScheme: lightDynamic,
+      fontFamily: 'poppins',
+      brightness: Brightness.light,
+      textTheme: createTextTheme(lightDynamic, false),
+      iconTheme: IconThemeData(
+        color: lightDynamic.onSurface,
       ),
-      displayMedium: TextStyle(
-        fontSize: 18,
-        color: textColor,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 0.1,
+      sliderTheme: SliderThemeData(
+        thumbColor: lightDynamic.primary,
+        activeTrackColor: lightDynamic.primary,
+        inactiveTrackColor: lightDynamic.onSurface.withOpacity(0.3),
       ),
-      displayLarge: TextStyle(
-        fontSize: 22,
-        color: textColor,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 0.1,
-      ),
-
-      labelSmall: TextStyle(
-        fontSize: 10,
-        color: textColor,
-        fontWeight: FontWeight.w400,
-      ),
-      labelMedium: TextStyle(
-        fontSize: 12,
-        color: textColor,
-        fontWeight: FontWeight.w500,
-      ),
-      labelLarge: TextStyle(
-        fontSize: 14,
-        color: textColor,
-        fontWeight: FontWeight.w600,
+      inputDecorationTheme: InputDecorationTheme(
+        hintStyle: TextStyle(color: lightDynamic.onSurface.withOpacity(0.5)),
+        labelStyle: TextStyle(color: lightDynamic.onSurface),
+        focusColor: lightDynamic.onSurface,
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: lightDynamic.primary),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: lightDynamic.primary),
+          borderRadius: BorderRadius.circular(12),
+        ),
       ),
     );
+  } else {
+    // Fall back to the app's predefined light theme
+    return kLightThemeData;
   }
+}
 
+ThemeData _createDarkTheme(ColorScheme? darkDynamic) {
+  if (darkDynamic != null) {
+    return ThemeData(
+      useMaterial3: true,
+      colorScheme: darkDynamic,
+      fontFamily: 'poppins',
+      brightness: Brightness.dark,
+      textTheme: createTextTheme(darkDynamic, true),
+      iconTheme: IconThemeData(
+        color: darkDynamic.onSurface,
+      ),
+      sliderTheme: SliderThemeData(
+        thumbColor: darkDynamic.primary,
+        activeTrackColor: darkDynamic.primary,
+        inactiveTrackColor: darkDynamic.onSurface.withOpacity(0.3),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        hintStyle: TextStyle(color: darkDynamic.onSurface.withOpacity(0.5)),
+        labelStyle: TextStyle(color: darkDynamic.onSurface),
+        focusColor: darkDynamic.onSurface,
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: darkDynamic.primary),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: darkDynamic.primary),
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+    );
+  } else {
+    // Fall back to the app's predefined dark theme
+    return kThemeData;
+  }
+}
 
-const List<String> defaultRingtones = ['Digital Alarm 1','Digital Alarm 2','Digital Alarm 3','Mystery','New Day'];
+TextTheme createTextTheme(ColorScheme colorScheme, bool isDark) {
+  final textColor = colorScheme.onSurface;
+
+  return TextTheme(
+    titleSmall: TextStyle(color: textColor, letterSpacing: 0.1, fontSize: 14),
+    titleMedium: TextStyle(color: textColor, letterSpacing: 0.1, fontSize: 16),
+    titleLarge: TextStyle(color: textColor, letterSpacing: 0.1, fontSize: 18),
+    bodySmall: TextStyle(color: textColor, letterSpacing: 0.1, fontSize: 12),
+    bodyMedium: TextStyle(color: textColor, letterSpacing: 0.1, fontSize: 14),
+    bodyLarge: TextStyle(color: textColor, letterSpacing: 0.1, fontSize: 16),
+    displaySmall: TextStyle(
+      fontSize: 14,
+      color: textColor,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.1,
+    ),
+    displayMedium: TextStyle(
+      fontSize: 18,
+      color: textColor,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0.1,
+    ),
+    displayLarge: TextStyle(
+      fontSize: 22,
+      color: textColor,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0.1,
+    ),
+    labelSmall: TextStyle(
+      fontSize: 10,
+      color: textColor,
+      fontWeight: FontWeight.w400,
+    ),
+    labelMedium: TextStyle(
+      fontSize: 12,
+      color: textColor,
+      fontWeight: FontWeight.w500,
+    ),
+    labelLarge: TextStyle(
+      fontSize: 14,
+      color: textColor,
+      fontWeight: FontWeight.w600,
+    ),
+  );
+}
+
+const List<String> defaultRingtones = [
+  'Digital Alarm 1',
+  'Digital Alarm 2',
+  'Digital Alarm 3',
+  'Mystery',
+  'New Day'
+];
 
 const Map<String, String> Holidays = {
   'Christian Holidays': 'en.christian#holiday@group.v.calendar.google.com',
