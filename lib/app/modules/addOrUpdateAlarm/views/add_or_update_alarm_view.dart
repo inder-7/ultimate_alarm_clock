@@ -31,6 +31,7 @@ import 'package:ultimate_alarm_clock/app/modules/settings/controllers/settings_c
 import 'package:ultimate_alarm_clock/app/modules/settings/controllers/theme_controller.dart';
 import 'package:ultimate_alarm_clock/app/utils/constants.dart';
 import 'package:ultimate_alarm_clock/app/utils/utils.dart';
+import 'package:ultimate_alarm_clock/ui/negative_condition.dart';
 import '../controllers/add_or_update_alarm_controller.dart';
 import 'alarm_date_tile.dart';
 import 'guardian_angel.dart';
@@ -850,6 +851,13 @@ class AddOrUpdateAlarmView extends GetView<AddOrUpdateAlarmController> {
                                       LabelTile(
                                         controller: controller,
                                         themeController: themeController,
+                                      ),
+                                      Divider(
+                                        color: themeController
+                                            .primaryDisabledTextColor.value,
+                                      ),
+                                      NegativeConditionDropdown(
+                                       
                                       ),
                                       Divider(
                                         color: themeController

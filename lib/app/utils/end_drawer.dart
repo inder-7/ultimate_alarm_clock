@@ -5,6 +5,8 @@ import 'package:ultimate_alarm_clock/app/routes/app_pages.dart';
 import 'package:ultimate_alarm_clock/app/utils/constants.dart';
 import 'package:ultimate_alarm_clock/app/utils/utils.dart';
 import 'package:ultimate_alarm_clock/app/modules/debug/views/debug_screen.dart';
+import 'package:ultimate_alarm_clock/ui/alarm_history.dart';
+import 'package:ultimate_alarm_clock/ui/task_list.dart';
 
 Widget buildEndDrawer(BuildContext context) {
   ThemeController themeController = Get.find<ThemeController>();
@@ -93,6 +95,48 @@ Widget buildEndDrawer(BuildContext context) {
             ),
             leading: Icon(
               Icons.bug_report,
+              size: 26,
+              color: themeController.primaryTextColor.value.withOpacity(0.8),
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Utils.hapticFeedback();
+              Get.back();
+              Get.to(() => const AlarmHistoryScreen());
+            },
+            contentPadding: const EdgeInsets.only(left: 20, right: 44),
+            title: Text(
+              'Alarm History'.tr,
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color:
+                        themeController.primaryTextColor.value.withOpacity(0.8),
+                  ),
+            ),
+            leading: Icon(
+              Icons.history,
+              size: 26,
+              color: themeController.primaryTextColor.value.withOpacity(0.8),
+            ),
+          ),
+
+          
+          ListTile(
+            onTap: () {
+              Utils.hapticFeedback();
+              Get.back();
+              Get.to(AlarmListScreen());
+            },
+            contentPadding: const EdgeInsets.only(left: 20, right: 44),
+            title: Text(
+              'To-do list'.tr,
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color:
+                        themeController.primaryTextColor.value.withOpacity(0.8),
+                  ),
+            ),
+            leading: Icon(
+              Icons.task,
               size: 26,
               color: themeController.primaryTextColor.value.withOpacity(0.8),
             ),
